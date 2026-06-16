@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #0b1020;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --accent-color: #6c63ff;
+  --accent-color-rgb: 108, 99, 255;
+  --accent-glow: rgba(108, 99, 255, 0.12);
+  --accent-glow-strong: rgba(108, 99, 255, 0.3);
+  
+  --success-color: #33ff88;
+  --warning-color: #ffc857;
+  --danger-color: #ff4a5a;
+}
+
+.theme-purple {
+  --bg-color: #0b1020;
+  --accent-color: #6c63ff;
+  --accent-color-rgb: 108, 99, 255;
+  --accent-glow: rgba(108, 99, 255, 0.12);
+  --accent-glow-strong: rgba(108, 99, 255, 0.35);
+}
+
+.theme-cyan {
+  --bg-color: #050f1a;
+  --accent-color: #00d9ff;
+  --accent-color-rgb: 0, 217, 255;
+  --accent-glow: rgba(0, 217, 255, 0.12);
+  --accent-glow-strong: rgba(0, 217, 255, 0.35);
+}
+
+.theme-amber {
+  --bg-color: #0a0803;
+  --accent-color: #ffc857;
+  --accent-color-rgb: 255, 200, 87;
+  --accent-glow: rgba(255, 200, 87, 0.1);
+  --accent-glow-strong: rgba(255, 200, 87, 0.3);
+}
+
+@theme {
+  --color-accent: var(--accent-color);
+  --color-accent-rgb: var(--accent-color-rgb);
+  --color-accent-glow: var(--accent-glow);
+  --color-accent-glow-strong: var(--accent-glow-strong);
+  
+  --color-bg-dungeon: var(--bg-color);
+  --color-card-dungeon: var(--card-bg);
+  --color-border-dungeon: var(--border-color);
+  
+  --color-success-dungeon: var(--success-color);
+  --color-warning-dungeon: var(--warning-color);
+  --color-danger-dungeon: var(--danger-color);
+}
+
+/* Base resets and styles */
+body {
+  background-color: var(--bg-color);
+  color: #ededed;
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Core Gaming Effects & Utility classes */
+.neon-glow {
+  text-shadow: 0 0 10px var(--accent-glow-strong), 0 0 20px var(--accent-glow);
+}
+
+.neon-border {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 15px var(--accent-glow);
+  transition: all 0.3s ease;
+}
+
+.neon-border:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--accent-glow-strong);
+}
+
+.glass-panel {
+  background: rgba(11, 16, 32, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Pulse animation for streaks */
+@keyframes flame-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px rgba(255, 74, 90, 0.5));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 200, 87, 0.8));
+  }
+}
+
+.animate-flame {
+  animation: flame-pulse 2s infinite ease-in-out;
+}
+
+/* Code scan grid animation */
+@keyframes scanning {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanner-line {
+  animation: scanning 2s linear infinite;
+  background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
+}
+
+/* Grid overlay background */
+.dungeon-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+}
