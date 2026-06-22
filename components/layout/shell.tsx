@@ -20,7 +20,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className={`theme-${activeTheme} ${isDayMode ? 'day-mode' : 'night-mode'} min-h-screen flex flex-row bg-bg-dungeon text-slate-100 transition-all duration-500`}>
+    <div className={`theme-${activeTheme} ${isDayMode ? 'day-mode' : 'night-mode'} min-h-screen flex flex-row bg-transparent text-slate-100 transition-all duration-500`}>
       {/* Lofi Nature Background */}
       <div className="lofi-nature-container">
         {/* Sky layer */}
