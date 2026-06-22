@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useGame, ThemeType } from '@/contexts/GameContext';
+import { useGame } from '@/contexts/GameContext';
 import { soundSystem } from '@/lib/sound/sound-system';
 import { 
   Coins, 
@@ -21,8 +21,6 @@ export default function Topbar() {
     streak, 
     soundEnabled, 
     setSoundEnabled, 
-    activeTheme, 
-    setTheme,
     isDayMode,
     toggleDayMode
   } = useGame();
@@ -35,13 +33,6 @@ export default function Topbar() {
     setSoundEnabled(nextVal);
     if (nextVal) {
       soundSystem.playClick();
-    }
-  };
-
-  const changeTheme = (theme: ThemeType) => {
-    setTheme(theme);
-    if (soundEnabled) {
-      soundSystem.playCoin();
     }
   };
 
@@ -88,34 +79,6 @@ export default function Topbar() {
 
         {/* Vertical divider */}
         <div className="w-[1px] h-8 bg-border-dungeon hidden sm:block" />
-
-        {/* Theme customization */}
-        <div className="items-center gap-2 hidden sm:flex">
-          <span className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Theme</span>
-          <div className="flex p-1 bg-slate-900 border border-border-dungeon rounded-lg gap-1">
-            <button
-              onClick={() => changeTheme('purple')}
-              className={`w-6 h-6 rounded-md bg-[#6c63ff] border cursor-pointer transition-transform hover:scale-110
-                ${activeTheme === 'purple' ? 'border-white scale-105' : 'border-transparent'}
-              `}
-              title="Purple Glow"
-            />
-            <button
-              onClick={() => changeTheme('cyan')}
-              className={`w-6 h-6 rounded-md bg-[#00d9ff] border cursor-pointer transition-transform hover:scale-110
-                ${activeTheme === 'cyan' ? 'border-white scale-105' : 'border-transparent'}
-              `}
-              title="Cyan Storm"
-            />
-            <button
-              onClick={() => changeTheme('amber')}
-              className={`w-6 h-6 rounded-md bg-[#ffc857] border cursor-pointer transition-transform hover:scale-110
-                ${activeTheme === 'amber' ? 'border-white scale-105' : 'border-transparent'}
-              `}
-              title="Amber Cyberpunk"
-            />
-          </div>
-        </div>
 
         {/* Day/Night toggle button */}
         <button
