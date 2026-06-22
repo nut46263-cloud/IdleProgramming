@@ -26,6 +26,8 @@ export interface GameContextProps {
   resetGame: () => void;
   claimDailyReward: (dayIndex: number) => void;
   claimedDays: number[];
+  isDayMode: boolean;
+  toggleDayMode: () => void;
 }
 
 const LOCAL_STORAGE_KEY = 'dev_dungeon_game_state';
@@ -42,6 +44,7 @@ interface GameState {
   activeTheme: ThemeType;
   soundEnabled: boolean;
   claimedDays: number[];
+  isDayMode: boolean;
 }
 
 const defaultState: GameState = {
@@ -62,6 +65,7 @@ const defaultState: GameState = {
   activeTheme: 'purple',
   soundEnabled: true,
   claimedDays: [],
+  isDayMode: true,
 };
 
 const GameContext = createContext<GameContextProps | undefined>(undefined);
@@ -268,6 +272,13 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem(LOCAL_STORAGE_KEY);
   };
 
+  const toggleDayMode = () => {
+    setState(prev => ({ ...prev, isDayMode: !prev.isDayMode }));
+    if (state.soundEnabled) {
+      soundSystem.playClick();
+    }
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -282,6 +293,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSoundEnabled,
         resetGame,
         claimDailyReward,
+        toggleDayMode,
       }}
     >
       {children}

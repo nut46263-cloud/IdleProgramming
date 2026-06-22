@@ -9,7 +9,8 @@ import {
   Volume2, 
   VolumeX, 
   Sparkles, 
-  Moon
+  Moon,
+  Sun
 } from 'lucide-react';
 
 export default function Topbar() {
@@ -21,7 +22,9 @@ export default function Topbar() {
     soundEnabled, 
     setSoundEnabled, 
     activeTheme, 
-    setTheme 
+    setTheme,
+    isDayMode,
+    toggleDayMode
   } = useGame();
 
   const xpNeeded = level * 100;
@@ -113,6 +116,15 @@ export default function Topbar() {
             />
           </div>
         </div>
+
+        {/* Day/Night toggle button */}
+        <button
+          onClick={toggleDayMode}
+          className="p-2.5 bg-slate-900 border border-border-dungeon hover:border-accent rounded-xl text-slate-400 hover:text-white cursor-pointer transition-all duration-200 flex items-center justify-center"
+          title={isDayMode ? 'Switch to Night Mode' : 'Switch to Day Mode'}
+        >
+          {isDayMode ? <Moon className="w-5 h-5 text-indigo-400" /> : <Sun className="w-5 h-5 text-yellow-500" />}
+        </button>
 
         {/* Sound toggle button */}
         <button

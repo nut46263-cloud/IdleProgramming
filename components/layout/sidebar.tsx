@@ -14,7 +14,8 @@ import {
   ChevronLeft, 
   ChevronRight, 
   ShieldAlert,
-  Gamepad2
+  Gamepad2,
+  HelpCircle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -27,6 +28,7 @@ export default function Sidebar() {
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Roadmap', path: '/roadmap', icon: Map },
     { name: 'Practice', path: '/challenge', icon: Flame },
+    { name: 'Q&A Trivia', path: '/qa', icon: HelpCircle },
     { name: 'Leaderboard', path: '/leaderboard', icon: Trophy },
     { name: 'Profile', path: '/profile', icon: User },
   ];

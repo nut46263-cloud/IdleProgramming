@@ -7,7 +7,7 @@
   --accent-color: #6c63ff;
   --accent-color-rgb: 108, 99, 255;
   --accent-glow: rgba(108, 99, 255, 0.12);
-  --accent-glow-strong: rgba(108, 99, 255, 0.3);
+  --accent-glow-strong: rgba(108, 99, 255, 0.35);
   
   --success-color: #33ff88;
   --warning-color: #ffc857;
@@ -15,7 +15,6 @@
 }
 
 .theme-purple {
-  --bg-color: #0b1020;
   --accent-color: #6c63ff;
   --accent-color-rgb: 108, 99, 255;
   --accent-glow: rgba(108, 99, 255, 0.12);
@@ -23,7 +22,6 @@
 }
 
 .theme-cyan {
-  --bg-color: #050f1a;
   --accent-color: #00d9ff;
   --accent-color-rgb: 0, 217, 255;
   --accent-glow: rgba(0, 217, 255, 0.12);
@@ -31,11 +29,30 @@
 }
 
 .theme-amber {
-  --bg-color: #0a0803;
   --accent-color: #ffc857;
   --accent-color-rgb: 255, 200, 87;
   --accent-glow: rgba(255, 200, 87, 0.1);
   --accent-glow-strong: rgba(255, 200, 87, 0.3);
+}
+
+/* Day Mode Variables */
+.day-mode {
+  --bg-color: #f0f9ff;
+  --card-bg: rgba(255, 255, 255, 0.45);
+  --border-color: rgba(15, 23, 42, 0.08);
+  --success-color: #16a34a;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+}
+
+/* Night Mode Variables */
+.night-mode {
+  --bg-color: #0b1020;
+  --card-bg: rgba(15, 23, 42, 0.6);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --success-color: #33ff88;
+  --warning-color: #ffc857;
+  --danger-color: #ff4a5a;
 }
 
 @theme {
@@ -53,13 +70,38 @@
   --color-danger-dungeon: var(--danger-color);
 }
 
+/* Typography Adaptations for Day/Night Mode */
+.day-mode {
+  color-scheme: light;
+}
+.day-mode .text-slate-100, .day-mode .text-slate-200 { color: #0f172a !important; }
+.day-mode .text-slate-300 { color: #334155 !important; }
+.day-mode .text-slate-400 { color: #475569 !important; }
+.day-mode .text-slate-500 { color: #64748b !important; }
+.day-mode .text-slate-600 { color: #94a3b8 !important; }
+.day-mode .bg-slate-900\/50, .day-mode .bg-slate-950\/80, .day-mode .bg-slate-950\/50, .day-mode .bg-slate-950\/20 {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+.day-mode .bg-slate-950 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.night-mode {
+  color-scheme: dark;
+}
+.night-mode .text-slate-100, .night-mode .text-slate-200 { color: #f1f5f9 !important; }
+.night-mode .text-slate-300 { color: #cbd5e1 !important; }
+.night-mode .text-slate-400 { color: #94a3b8 !important; }
+.night-mode .text-slate-500 { color: #64748b !important; }
+.night-mode .text-slate-600 { color: #475569 !important; }
+
 /* Base resets and styles */
 body {
   background-color: var(--bg-color);
-  color: #ededed;
   font-family: 'Poppins', 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Custom Scrollbar */
@@ -68,6 +110,9 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+.night-mode ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.3);
 }
 ::-webkit-scrollbar-thumb {
@@ -95,9 +140,9 @@ body {
 }
 
 .glass-panel {
-  background: rgba(11, 16, 32, 0.6);
+  background: var(--card-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
 }
 
 /* Pulse animation for streaks */
@@ -131,10 +176,102 @@ body {
   background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
 }
 
-/* Grid overlay background */
-.dungeon-grid {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+/* ==================== LOFI NATURE BACKGROUND ==================== */
+.lofi-nature-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Sky gradient transitions */
+.lofi-sky {
+  position: absolute;
+  inset: 0;
+  transition: background 0.8s ease-in-out;
+}
+
+.day-mode .lofi-sky {
+  background: linear-gradient(to bottom, #7dd3fc, #bae6fd, #e0f2fe 70%);
+}
+
+.night-mode .lofi-sky {
+  background: linear-gradient(to bottom, #090d16, #0f172a, #1e1b4b 70%);
+}
+
+/* Sun and Moon */
+.lofi-celestial {
+  position: absolute;
+  top: 8%;
+  left: 60%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.day-mode .lofi-celestial {
+  background: #fef08a;
+  box-shadow: 0 0 45px #fde047;
+  transform: scale(1) translate(0, 0);
+}
+
+.night-mode .lofi-celestial {
+  background: #f8fafc;
+  box-shadow: 0 0 35px #e2e8f0;
+  transform: scale(0.9) translate(-40px, 30px);
+}
+
+/* Clouds floating animation */
+@keyframes float-cloud-1 {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(100vw); }
+}
+@keyframes float-cloud-2 {
+  0% { transform: translateX(-350px); }
+  100% { transform: translateX(100vw); }
+}
+
+.lofi-cloud-1 {
+  animation: float-cloud-1 75s linear infinite;
+  opacity: 0.65;
+}
+
+.lofi-cloud-2 {
+  animation: float-cloud-2 95s linear infinite;
+  animation-delay: -35s;
+  opacity: 0.45;
+}
+
+/* Hills SVG Fills */
+.hill-back { transition: fill 0.8s ease; }
+.day-mode .hill-back { fill: #86efac; }
+.night-mode .hill-back { fill: #0f4626; }
+
+.hill-mid { transition: fill 0.8s ease; }
+.day-mode .hill-mid { fill: #4ade80; }
+.night-mode .hill-mid { fill: #135530; }
+
+.hill-front { transition: fill 0.8s ease; }
+.day-mode .hill-front { fill: #22c55e; }
+.night-mode .hill-front { fill: #116231; }
+
+.lofi-stone { transition: fill 0.8s ease; }
+.day-mode .lofi-stone { fill: #94a3b8; }
+.night-mode .lofi-stone { fill: #334155; }
+
+/* Flowers animation */
+.lofi-flower {
+  transition: fill 0.8s ease, opacity 0.8s ease;
+}
+.day-mode .lofi-flower {
+  fill: #ffffff;
+  opacity: 0.8;
+}
+.night-mode .lofi-flower {
+  fill: #a7f3d0;
+  opacity: 0.65;
 }
